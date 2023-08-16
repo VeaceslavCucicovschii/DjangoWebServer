@@ -1,0 +1,14 @@
+{% extends 'layout.html' %}
+
+{% block content %}
+
+    {% if visitingUser.is_authenticated %}
+        <h2>ADD COMMENT</h2>
+        <form action="/comment/create/{{post.id}}" method="POST">
+            <textarea name="body" rows="4" cols="50" placeholder="body"></textarea><br>
+            <button>SAVE</button><br>
+            {% csrf_token %}
+        </form>
+    {% endif %}
+
+{% endblock %}

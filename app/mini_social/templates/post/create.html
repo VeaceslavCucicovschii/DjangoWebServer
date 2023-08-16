@@ -1,0 +1,15 @@
+{% extends 'layout.html' %}
+
+{% block content %}
+
+    {% if visitingUser.is_authenticated %}
+        <h2>ADD POST</h2>
+        <form action="/post/create" method="POST">
+            <input name="title" type="text" placeholder="title"><br>
+            <textarea name="body" rows="4" cols="50" placeholder="body"></textarea><br>
+            <button>SAVE</button><br>
+            {% csrf_token %}
+        </form>
+    {% endif %}
+
+{% endblock %}

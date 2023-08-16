@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>SIGNUP PAGE</title>
+</head>
+<body>
+    <h1 style="text-align: center">WELCOME TO MINI SOCIAL</h1>
+
+    <div style="width: 60%; margin: 10px auto;">
+        {% block topBar %}
+            {% if messages and show_notifications %}
+            {% for message in messages %}
+                {% if message.tags == 'success' %}
+                    <div style="color: green; padding: 10px; border: 3px solid green; margin-bottom: 10px;">
+                        {{ message }}
+                    </div>    
+                {% endif %}
+            {% endfor %}
+            {% endif %}        
+        {% endblock %}
+    </div>
+
+    <nav style="width: 60%; margin: 10px auto;">
+        <a href="/">Home</a> -
+        {% if not user.is_authenticated %}
+            <a href="/user/register">Sign up</a> -
+            <a href="/user/login">Sign in</a><br>
+        {% else %}
+            <a href="/user/profile/{{user.id}}">Profile</a> -
+            <a href="/user/logout"> Sign Out</a><br>
+        {% endif %}
+    </nav>
+
+    <div style="width: 60%; margin: 10px auto;">
+        {% block content %}
+            <!-- CONTENT -->
+        {% endblock %}
+    </div>
+
+    <p style="text-align: center">&copy; <script>document.write(new Date().getFullYear())</script> SOCIAL INC.</p>
+
+</body>
+</html>

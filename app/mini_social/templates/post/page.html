@@ -1,0 +1,27 @@
+{% extends 'layout.html' %}
+{% load static %}
+
+{% block content %}
+
+    <h2>
+        Post from 
+        <a href="/user/profile/{{visitingUser.id}}">{{post.author.username}}</a>
+    </h2>
+
+    <ul>
+        <p>{{post.title}}</p>
+        <p>{{post.body}}</p>
+    </ul>
+
+    <h2 style="display: inline;">Comments</h2>
+    - <a href="/comment/create/{{post.id}}"> Add comment</a>
+    <ul>
+        {% for comment in comments %}
+            <img src="{% static comment.author.avatar %}" width="20"/> -
+            <a href="/user/profile/{{comment.author.id}}">{{comment.author.username}}</a><br>
+            <p>{{comment.body}}</p>
+        {% endfor %}
+    </ul>
+
+
+{% endblock %}

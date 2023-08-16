@@ -1,0 +1,42 @@
+{% extends 'layout.html' %}
+
+{% block content %}
+
+    <h2>EDIT YOUR PROFILE</h2>
+    
+    {% if messages %}
+        {% for message in messages %}
+            {% if message.tags == 'error' %}
+                <div style="color: red; padding: 10px; border: 3px solid red; margin-bottom: 10px;">
+                    {{ message }}
+                </div>    
+            {% endif %}
+        {% endfor %}
+    {% endif %}
+
+    <form action="/user/profile/edit/{{profileUser.id}}" method="POST" enctype="multipart/form-data">
+        <input 
+            name="username" 
+            type="text" 
+            placeholder="enter username..."
+            value="{{profileUser.username}}">
+            <br>
+        <input 
+            name="email" 
+            type="text" 
+            placeholder="enter email..."
+            value="{{profileUser.email}}">
+            <br>
+        <input 
+            name="avatar" 
+            type="file" 
+            placeholder="choose avatar..."
+            value="{{profileUser.avatar}}">
+            <br>
+        
+        {% csrf_token %}
+
+        <button>SAVE</button><br>
+    </form>
+
+{% endblock %}

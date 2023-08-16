@@ -1,0 +1,15 @@
+{% extends 'layout.html' %}
+
+{% block content %}
+
+    {% if visitingUser.id == post.author.id %}
+        <h2>UPDATE POST</h2>
+        <form action="/post/update/{{post.id}}" method="POST">
+            <input name="title" type="text" placeholder="{{post.title}}"><br>
+            <input name="body" type="text" placeholder="{{post.body}}"><br>
+            <button>UPDATE</button><br>
+            {% csrf_token %}
+        </form>
+    {% endif %}
+
+{% endblock %}

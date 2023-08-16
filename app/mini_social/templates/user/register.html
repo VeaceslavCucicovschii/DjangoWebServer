@@ -1,0 +1,44 @@
+{% extends 'layout.html' %}
+
+{% block content %}
+
+    <h2>CREATE YOUR ACCOUNT</h2>
+
+    {% if messages %}
+        {% for message in messages %}
+            {% if message.tags == 'error' %}
+                <div style="color: red; padding: 10px; border: 3px solid red; margin-bottom: 10px;">
+                    {{ message }}
+                </div>    
+            {% endif %}
+        {% endfor %}
+    {% endif %}
+
+    <form action="/user/register" method="POST">
+        <input 
+            name="username" 
+            type="text" 
+            placeholder="choose username...">
+            <br>
+        <input 
+            name="email" 
+            type="text" 
+            placeholder="enter email...">
+            <br>
+        <input 
+            name="password" 
+            type="password" 
+            placeholder="enter password...">
+            <br>
+        <input 
+            name="confirm_password" 
+            type="password" 
+            placeholder="confirm password...">
+            <br>
+        
+        {% csrf_token %}
+
+        <button>CREATE</button><br>
+    </form>
+
+{% endblock %}

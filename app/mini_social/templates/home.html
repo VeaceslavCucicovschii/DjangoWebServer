@@ -1,0 +1,21 @@
+{% extends 'layout.html' %}
+
+{% block content %}
+
+    <!-- 5 new users -->
+    <h2>New users</h2>
+    <ul>
+        {% for user in last_users %}
+            <li>{{user.username}}</li>
+        {% endfor %}
+    </ul>
+
+    <!-- 3 latest posts -->
+    <h2>Fresh posts</h2>
+    <ul>
+        {% for post in last_posts %}
+            <li>{{post.title}}</li>
+        {% endfor %}
+    </ul>
+
+{% endblock %}

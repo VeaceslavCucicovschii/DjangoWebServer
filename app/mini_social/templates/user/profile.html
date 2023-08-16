@@ -1,0 +1,55 @@
+{% extends 'layout.html' %}
+{% load static %}
+
+{% block content %}
+
+    <img src="{% static profileUser.avatar %}" width="150"/>
+    
+    <h2>USER PROFILE</h2>
+
+    {% if profileUser.id == visitingUser.id %}
+        <a href="/user/profile/edit/{{profileUser.id}}">EDIT</a> -
+        <a href="/post/create"> Add Post</a>
+    {% endif %}
+
+    <h3>
+        {{profileUser.username}} - ({{profileUser.email}})
+        {% if profileUser.id != visitingUser.id and not profileUserIsNotVisitingUserFriend%}
+             - <a href="/user/add/friend/{{profileUser.id}}">Add as friend</a>
+        {% endif %}
+    </h3>
+
+    {% if profileUser.id == visitingUser.id %}
+    <h3>Settings</h3>
+    <form action="/user/preferences/notifications">
+        <label>
+            <input type="checkbox" name="toggle" {% if show_notifications %} checked {% endif %} /> 
+            notifications
+        </label>    
+        <button>SAVE</button>
+    <form>
+    {% endif %}
+
+    <h3>Friends</h3>
+    <ul>
+        {% for friend in userFriends %}
+            <li>
+                <a href="/user/profile/{{friend.id}}">{{friend.username}}</a>
+                {% if profileUser.id == visitingUser.id %}
+                    - <a href="/user/remove/friend/{{friend.id}}"> remove </a>
+                {% endif %}
+            </li>
+        {% endfor %}
+    </ul>
+
+    <h3>Posts</h3>
+    <ul>
+        {% for post in profileUserPosts %}
+            <a href="/post/page/{{post.id}}">{{post.title}}</a> -
+            <a href="/post/delete/{{post.id}}"> remove</a> -
+            <a href="/post/update/{{post.id}}"> edit</a><br>
+            {{post.body}}<br><br>
+        {% endfor %}
+    </ul>
+
+{% endblock %}
